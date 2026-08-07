@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% for obj in objs %}
+
+    <p>{{obj.case.case_number}} | {{obj.created}} | {{obj.ip_address}} {{obj.user_agent}} | {{obj.platform}} | {{obj.mobile}} | {{obj.latitude}} {{obj.longitude}} | {{obj.accuracy}} meter</p>
+{% endfor %}
+
+{% endblock content %}
