@@ -1,9 +1,59 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-{% for obj in objs %}
 
-    <p>{{obj.case.case_number}} | {{obj.created}} | {{obj.ip_address}} {{obj.user_agent}} | {{obj.platform}} | {{obj.mobile}} | {{obj.latitude}} {{obj.longitude}} | {{obj.accuracy}} meter</p>
-{% endfor %}
+
+    <h1 class="my-3">Trackers for  </h1>
+
+    <table class="table table-bordered table-hover table-sm align-middle" style="position:relative;max-width:100%">
+
+        <thead class="table-dark">
+            <tr>
+
+                <th>Időpont</th>
+                <th>IP cím</th>
+                <th>User Agent</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for obj in objs %}
+            <!-- Fő adatok -->
+            <tr>
+                <td style="white-space:nowrap">
+                    {{ obj.created }}
+                </td>
+                <td>
+                    {{ obj.ip_address }}
+                </td>
+                <td style="white-space:wrap">
+                    {{ obj.user_agent }}
+                </td>
+            </tr>
+            <!-- Kiegészítő adatok -->
+            <tr class="table-light">
+                <!-- Behúzás -->
+                <td><i class="bi bi-arrow-right-square"></i></td>
+                <td>
+                    <strong>Platform:</strong>
+                    {{ obj.platform }}
+                </td>
+
+                <td>
+                    <strong>GPS:</strong>
+                    {{ obj.latitude }}, {{ obj.longitude }}
+                    <small class="text-muted">
+                        | Accuracy: {{ obj.accuracy }} méter
+                    </small>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
 
 {% endblock content %}

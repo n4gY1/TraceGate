@@ -40,7 +40,7 @@ def show_trackers_view(request,case_id):
         #TODO majd itt kéne üzenet vagy valami
         return redirect('/')
 
-    objs = Tracker.objects.filter(case=case)
+    objs = Tracker.objects.filter(case=case).order_by('-created')
     template = "tracker/list_trackers.html"
     context = {"objs": objs,"app_domain":APP_DOMAIN}
     return render(request, template, context)
