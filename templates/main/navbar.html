@@ -1,8 +1,42 @@
-<div class="container-fluid">
-    <div class="row my-3">
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-start"><a href="{% url 'create_case_view' %}" class="button"><i class="bi bi-plus-square m-1"></i>Add New Case</a></div>
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-start"><a href="{% url 'list_case_url_view' %}" class="button"><i class="bi bi-list-columns m-1"></i>List My Cases</a></div>
+<div class="cyber-navbar">
+
+    <div class="nav-brand">
+        <div class="nav-brand-icon">
+            <i class="bi bi-shield-lock-fill"></i>
+        </div>
+
+        <div class="nav-brand-text">
+            <span class="nav-brand-title">TRACKER</span>
+            <span class="nav-brand-subtitle">INTELLIGENCE SYSTEM</span>
+        </div>
     </div>
 
+
+    <div class="nav-links">
+
+        <a href="{% url 'create_case_view' %}" class="cyber-nav-btn primary">
+            <div class="nav-btn-icon">
+                <i class="bi bi-plus-lg"></i>
+            </div>
+
+            <div class="nav-btn-text">
+                <span>CREATE</span>
+                <small>New Case</small>
+            </div>
+        </a>
+
+
+        <a href="{% url 'list_case_url_view' %}" class="cyber-nav-btn">
+            <div class="nav-btn-icon">
+                <i class="bi bi-database"></i>
+            </div>
+
+            <div class="nav-btn-text">
+                <span>CASES</span>
+                <small>Investigation List</small>
+            </div>
+        </a>
+
+    </div>
 
 </div>

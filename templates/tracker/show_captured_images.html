@@ -3,17 +3,135 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 
-<div class="row mt-5">
-    {% for picture in pictures %}
-        <div class="col col-4">
-            <a href="{{picture.photo.url}}" target="_blank">
-                <img src="{{picture.photo.url}}" class="img-thumbnail" style="width:200px;height:200px;object-fit:cover">
-            </a>
+<div class="cyber-page evidence-page">
+
+    <div class="cyber-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="cyber-container">
+
+        <!-- HEADER -->
+
+        <div class="page-header evidence-header">
+
+            <div class="header-left">
+
+                <div class="icon-box">
+                    <i class="bi bi-camera-reels"></i>
+                </div>
+
+                <div>
+
+                    <div class="eyebrow">
+                        <span class="status-dot"></span>
+                        CAPTURED INTELLIGENCE
+                    </div>
+
+                    <h1>Evidence Gallery</h1>
+
+                    <p>
+                        Review captured images and visual intelligence.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="capture-counter">
+
+                <i class="bi bi-camera"></i>
+
+                <div>
+                    <span>TOTAL CAPTURES</span>
+                    <strong>{{ pictures|length }}</strong>
+                </div>
+
+            </div>
+
         </div>
-    {% endfor %}
+
+
+        <!-- GALLERY -->
+
+        {% if pictures %}
+
+        <div class="evidence-grid">
+
+            {% for picture in pictures %}
+
+            <a href="{{ picture.photo.url }}"
+               target="_blank"
+               class="evidence-card">
+
+                <div class="evidence-image">
+
+                    <img src="{{ picture.photo.url }}"
+                         alt="Captured evidence">
+
+                    <div class="image-overlay">
+
+                        <div class="scan-line"></div>
+
+                        <div class="image-center-icon">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="evidence-footer">
+
+                    <div class="evidence-label">
+
+                        <i class="bi bi-camera-fill"></i>
+
+                        <span>
+                            CAPTURED IMAGE
+                        </span>
+
+                    </div>
+
+                    <i class="bi bi-box-arrow-up-right"></i>
+
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="evidence-empty">
+
+            <div class="empty-radar">
+
+                <div class="radar-ring ring-1"></div>
+                <div class="radar-ring ring-2"></div>
+                <div class="radar-ring ring-3"></div>
+
+                <i class="bi bi-camera"></i>
+
+            </div>
+
+
+            <h2>No Captured Images</h2>
+
+            <p>
+                No visual intelligence has been collected for this session.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
 
 </div>
-
-
 
 {% endblock content %}

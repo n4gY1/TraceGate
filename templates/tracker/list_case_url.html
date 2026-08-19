@@ -3,43 +3,265 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 
+<div class="cyber-page">
 
-    <a href="{% url 'create_case_view' %}" class="badge text-bg-info p-3 my-2"><i class="bi bi-plus-square p-1 m-1"></i>Új bűnügy hozzáadása</a>
+    <div class="cyber-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="cyber-container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+
+            <div class="header-left">
+
+                <div class="icon-box">
+                    <i class="bi bi-folder2-open"></i>
+                </div>
+
+                <div>
+
+                    <div class="eyebrow">
+                        <span class="status-dot"></span>
+                        INVESTIGATION DATABASE
+                    </div>
+
+                    <h1>Case Management</h1>
+
+                    <p>
+                        Manage and monitor investigation tracking cases.
+                    </p>
+
+                </div>
+
+            </div>
 
 
+            <a href="{% url 'create_case_view' %}"
+               class="cyber-action-btn">
 
-<table class="table table-bordered table-hover table-sm align-middle table-dark table-striped" style="position:relative;max-width:100%">
-<thead class="table-dark">
-    <tr>
-        <th>Case Number</th>
-        <th>Created at</th>
-        <th>Description</th>
-        <th>Tracker View</th>
+                <i class="bi bi-plus-lg"></i>
 
-    </tr>
-</thead>
-<tbody>
-    {% for obj in objs %}
-    <!-- Fő adatok -->
-    <tr>
-        <td style="white-space:nowrap">
-            <strong>{{ obj.created }}</strong>
-        </td>
-        <td>
-            <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-info">
-                    {{obj.case_number}}
+                <span>
+                    <strong>NEW CASE</strong>
+                    <small>Create Investigation</small>
+                </span>
+
             </a>
-        </td>
-        <td>{{obj.description}}</td>
-        <td>
-            <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-info">
-                    <i class="bi bi-eye"></i>
-            </a>
-        </td>
-    </tr>
-    {% endfor %}
-</tbody>
-</table>
 
+        </div>
+
+
+        <!-- STATS -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-folder2"></i>
+                </div>
+
+                <div>
+                    <span>Total Cases</span>
+                    <strong>{{ objs|length }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-activity"></i>
+                </div>
+
+                <div>
+                    <span>Tracker System</span>
+                    <strong class="online-text">ONLINE</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div>
+                    <span>Database Status</span>
+                    <strong class="online-text">ACTIVE</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CASE TABLE -->
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div>
+
+                    <span class="section-label">
+                        <i class="bi bi-database"></i>
+                        INVESTIGATION RECORDS
+                    </span>
+
+                    <h2>Available Cases</h2>
+
+                </div>
+
+                <div class="record-count">
+                    {{ objs|length }} CASE{{ objs|length|pluralize }}
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="case-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                <i class="bi bi-hash"></i>
+                                Case Number
+                            </th>
+
+                            <th>
+                                <i class="bi bi-clock"></i>
+                                Created
+                            </th>
+
+                            <th>
+                                <i class="bi bi-file-text"></i>
+                                Description
+                            </th>
+
+                            <th>
+                                <i class="bi bi-radar"></i>
+                                Intelligence
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for obj in objs %}
+
+                        <tr>
+
+                            <td>
+
+                                <a href="{% url 'show_trackers_view' case_id=obj.pk %}"
+                                   class="case-number">
+
+                                    <span class="case-icon">
+                                        <i class="bi bi-folder"></i>
+                                    </span>
+
+                                    {{ obj.case_number }}
+
+                                </a>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="case-date">
+
+                                    <i class="bi bi-calendar3"></i>
+
+                                    {{ obj.created }}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="case-description">
+
+                                    {{ obj.description|default:"No description available." }}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <a href="{% url 'show_trackers_view' case_id=obj.pk %}"
+                                   class="tracker-view-btn">
+
+                                    <i class="bi bi-radar"></i>
+
+                                    <span>OPEN TRACKERS</span>
+
+                                    <i class="bi bi-arrow-right-short arrow"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                <div class="empty-state">
+
+                                    <i class="bi bi-folder-x"></i>
+
+                                    <h3>No investigations found</h3>
+
+                                    <p>
+                                        Create a new case to start collecting intelligence.
+                                    </p>
+
+                                    <a href="{% url 'create_case_view' %}"
+                                       class="empty-create-btn">
+
+                                        <i class="bi bi-plus-lg"></i>
+
+                                        CREATE NEW CASE
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock content %}

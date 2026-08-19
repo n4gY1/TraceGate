@@ -3,12 +3,179 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 
+<div class="cyber-page create-case-page">
 
-<div class="card" style="width:100%;text-align:left">
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Mentés" class="button my-3">
-</form>
+    <div class="cyber-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="create-case-container">
+
+        <!-- HEADER -->
+
+        <div class="create-header">
+
+            <div class="create-icon">
+
+                <i class="bi bi-folder-plus"></i>
+
+            </div>
+
+
+            <div>
+
+                <div class="eyebrow">
+
+                    <span class="status-dot"></span>
+
+                    INVESTIGATION MANAGEMENT
+
+                </div>
+
+
+                <h1>Create New Case</h1>
+
+                <p>
+                    Create a new investigation and initialize a tracking endpoint.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+
+        <div class="case-form-card">
+
+            <div class="form-card-header">
+
+                <div>
+
+                    <span class="section-label">
+
+                        <i class="bi bi-file-earmark-plus"></i>
+
+                        CASE CONFIGURATION
+
+                    </span>
+
+                    <h2>Investigation Details</h2>
+
+                </div>
+
+
+                <div class="form-status">
+
+                    <span></span>
+
+                    READY
+
+                </div>
+
+            </div>
+
+
+            <form action=""
+                  method="POST"
+                  class="cyber-form">
+
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <div class="form-field">
+
+                    <label for="{{ field.id_for_label }}">
+
+                        {{ field.label }}
+
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+
+                    <small>
+                        {{ field.help_text }}
+                    </small>
+
+                    {% endif %}
+
+
+                    {% for error in field.errors %}
+
+                    <div class="field-error">
+
+                        <i class="bi bi-exclamation-triangle"></i>
+
+                        {{ error }}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% endfor %}
+
+
+                <div class="form-actions">
+
+                    <a href="{% url 'list_case_url_view' %}"
+                       class="cancel-btn">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        CANCEL
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="save-case-btn">
+
+                        <i class="bi bi-shield-check"></i>
+
+                        <span>
+                            CREATE CASE
+                        </span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- SECURITY INFO -->
+
+        <div class="security-info">
+
+            <div class="security-icon">
+
+                <i class="bi bi-shield-lock"></i>
+
+            </div>
+
+            <div>
+
+                <strong>SECURE CASE INITIALIZATION</strong>
+
+                <p>
+                    A unique tracking endpoint will be generated for this investigation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
 {% endblock content %}
