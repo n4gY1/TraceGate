@@ -1,50 +1,49 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+{% include 'main/navbar.html' %}
 
+    <h1 class="my-3">Trackers for  {{case.case_number}}</h1>
 
-    <h1 class="my-3">Trackers for  </h1>
-
-    <table class="table table-bordered table-hover table-sm align-middle" style="position:relative;max-width:100%">
-
+    <table class="table table-bordered table-hover table-sm align-middle table-dark table-striped" style="position:relative;max-width:100%">
         <thead class="table-dark">
             <tr>
-
                 <th>Időpont</th>
                 <th>IP cím</th>
                 <th>User Agent</th>
+                <th>Captured Images</th>
             </tr>
         </thead>
-
         <tbody>
             {% for obj in objs %}
             <!-- Fő adatok -->
             <tr>
                 <td style="white-space:nowrap">
-                    {{ obj.created }}
+                    <strong>{{ obj.created }}</strong>
                 </td>
                 <td>
-                    {{ obj.ip_address }}
+                    <strong>{{ obj.x_forwarded_for }}</strong>
                 </td>
-                <td style="white-space:wrap">
+                <td style="white-space:wrap" colspan="2">
                     {{ obj.user_agent }}
                 </td>
             </tr>
             <!-- Kiegészítő adatok -->
-            <tr class="table-light">
+            <tr class="">
                 <!-- Behúzás -->
                 <td><i class="bi bi-arrow-right-square"></i></td>
                 <td>
-                    <strong>Platform:</strong>
+                    Platform:
                     {{ obj.platform }}
                 </td>
-
                 <td>
-                    <strong>GPS:</strong>
-                    {{ obj.latitude }}, {{ obj.longitude }}
-                    <small class="text-muted">
-                        | Accuracy: {{ obj.accuracy }} méter
-                    </small>
+                    <i class="bi bi-geo-alt mr-2"></i> {{ obj.latitude }}, {{ obj.longitude }} |
+                    <i class="bi bi-cursor mr-2"></i> {{ obj.accuracy }} méter
+                </td>
+                <td>
+                    <a href="{% url 'show_captured_images' obj.pk %}" style="text-decoration: none" class="text-info" >
+                        <i class="bi bi-camera mr-2"></i> {{obj.get_camera_captures.all.count}}
+                    </a>
                 </td>
             </tr>
             {% endfor %}

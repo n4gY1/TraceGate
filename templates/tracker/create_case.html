@@ -1,6 +1,9 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+{% include 'main/navbar.html' %}
+
+
 <div class="card" style="width:100%;text-align:left">
 <form action="" method="POST">
     {% csrf_token %}

@@ -15,41 +15,16 @@ body {
     overflow-y: auto;
     background: #05070d;
     color: white;
-}
 
-/* Futurisztikus animált háttér */
-body::before {
-    content: "";
-    position: fixed;
-    inset: -50%;
     background:
         radial-gradient(circle at 20% 30%, rgba(0,255,255,.15), transparent 30%),
         radial-gradient(circle at 80% 70%, rgba(120,0,255,.18), transparent 30%),
         linear-gradient(120deg, #05070d, #111827, #05070d);
 
-    animation: moveBg 4s infinite alternate ease-in-out;
 }
 
-@keyframes moveBg {
-    from {
-        transform: translate(-5%, -5%) rotate(0deg);
-    }
-    to {
-        transform: translate(5%, 5%) rotate(10deg);
-    }
-}
 
-/* Finom rács */
-body::after {
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-    background-size:40px 40px;
-    mask-image:linear-gradient(to bottom,transparent,black);
-}
+
 
 .card {
     position:relative;

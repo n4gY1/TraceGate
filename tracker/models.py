@@ -21,8 +21,10 @@ class Tracker(models.Model):
     accuracy = models.IntegerField(null=True, blank=True)
     timestamp = models.IntegerField(blank=True, null=True)
 
+
+
 class CameraCapture(models.Model):
-    case = models.ForeignKey('Case', on_delete=models.CASCADE)
+    tracker = models.ForeignKey('Tracker', on_delete=models.CASCADE,null=True, blank=True,related_name="get_camera_captures")
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='camera_captures', null=True, blank=True)
 
