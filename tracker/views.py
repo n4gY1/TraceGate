@@ -21,6 +21,7 @@ def create_case_view(request):
         obj = form.save(commit=False)
         obj.owner = request.user
         obj.save()
+        return redirect("/")
 
     return render(request, template, context)
 

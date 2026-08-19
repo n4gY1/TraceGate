@@ -3,7 +3,8 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 
-    <h1 class="my-3">Trackers for  {{case.case_number}}</h1>
+    <span class="badge text-bg-dark my-3">Trackers for  {{case.case_number}}</span>
+    Share this url with : <span class="badge text-bg-info my-3">{{ request.scheme }}://{{request.get_host}}/id/{{case.url_id}}</span>
 
     <table class="table table-bordered table-hover table-sm align-middle table-dark table-striped" style="position:relative;max-width:100%">
         <thead class="table-dark">

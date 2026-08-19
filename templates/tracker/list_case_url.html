@@ -3,27 +3,43 @@
 {% block content %}
 {% include 'main/navbar.html' %}
 
-<div class="card" style="width:100%;text-align:left">
-    <a href="{% url 'create_case_view' %}" class="button"><i class="bi bi-plus-square p-1 m-1"></i>Új bűnügy hozzáadása</a>
 
-    <h1 class="my-3">Bűnügy Lista </h1>
+    <a href="{% url 'create_case_view' %}" class="badge text-bg-info p-3 my-2"><i class="bi bi-plus-square p-1 m-1"></i>Új bűnügy hozzáadása</a>
+
+
+
+<table class="table table-bordered table-hover table-sm align-middle table-dark table-striped" style="position:relative;max-width:100%">
+<thead class="table-dark">
+    <tr>
+        <th>Case Number</th>
+        <th>Created at</th>
+        <th>Description</th>
+        <th>Tracker View</th>
+
+    </tr>
+</thead>
+<tbody>
     {% for obj in objs %}
-        <div class="row">
-            <div class="col col-3 text-light">
-                <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-light">
+    <!-- Fő adatok -->
+    <tr>
+        <td style="white-space:nowrap">
+            <strong>{{ obj.created }}</strong>
+        </td>
+        <td>
+            <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-info">
                     {{obj.case_number}}
-                </a>
-            </div>
-            <div class="col col-7 text-light">{{obj.description}}  </div>
-            <div class="col col-2 d-flex justify-content-end">
-                <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-light">
+            </a>
+        </td>
+        <td>{{obj.description}}</td>
+        <td>
+            <a href="{% url 'show_trackers_view' case_id=obj.pk %}" style="text-decoration:none" class="text-info">
                     <i class="bi bi-eye"></i>
-                </a>
-            </div>
-
-        </div>
+            </a>
+        </td>
+    </tr>
     {% endfor %}
-</div>
+</tbody>
+</table>
 
 
 {% endblock content %}
