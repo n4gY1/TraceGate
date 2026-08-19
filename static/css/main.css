@@ -2495,15 +2495,15 @@ button:hover {
 
 .save-case-btn {
     display: inline-flex;
-
     align-items: center;
 
     gap: 10px;
-
     padding: 13px 20px;
-
+    width:auto;
     border: none;
-
+    max-width: max-content;
+    flex: 0 0 auto;
+    gap: 10px;
     border-radius: 11px;
 
     cursor: pointer;
@@ -2653,7 +2653,7 @@ button:hover {
 
     .cancel-btn,
     .save-case-btn {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
 }
