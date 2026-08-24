@@ -8,7 +8,7 @@ from tracker.models import Case
 class CaseForm(ModelForm):
     class Meta:
         model = Case
-        fields = ['case_number','description']
+        fields = ['case_number','description','redirect_url']
 
 
     def __init__(self, *args, **kwargs):

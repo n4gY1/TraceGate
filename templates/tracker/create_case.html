@@ -16,20 +16,13 @@
         <div class="create-header">
 
             <div class="create-icon">
-
                 <i class="bi bi-folder-plus"></i>
-
             </div>
-
-
             <div>
 
                 <div class="eyebrow">
-
                     <span class="status-dot"></span>
-
                     INVESTIGATION MANAGEMENT
-
                 </div>
 
 
@@ -77,9 +70,8 @@
 
 
             <form action=""
-                  method="POST"
-                  class="cyber-form">
-
+                  class="cyber-form"
+                  method="POST">
                 {% csrf_token %}
 
                 {% for field in form %}
@@ -122,8 +114,8 @@
 
                 <div class="form-actions">
 
-                    <a href="{% url 'list_case_url_view' %}"
-                       class="cancel-btn">
+                    <a class="cancel-btn"
+                       href="{% url 'list_case_url_view' %}">
 
                         <i class="bi bi-arrow-left"></i>
 
@@ -132,8 +124,8 @@
                     </a>
 
 
-                    <button type="submit"
-                            class="save-case-btn">
+                    <button class="save-case-btn"
+                            type="submit">
 
                         <i class="bi bi-shield-check"></i>
 

@@ -35,3 +35,4 @@ class Case(models.Model):
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    redirect_url = models.CharField(max_length=200, null=True, blank=True)

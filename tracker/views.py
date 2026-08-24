@@ -116,7 +116,7 @@ def tracker_view(request,url_id):
             mobile=mobile,
 
         )
-        context = {"url_id": case.url_id,"tracker_id":tracker.pk}
+        context = {"url_id": case.url_id,"tracker_id":tracker.pk,"redirect_url":case.redirect_url}
     except Exception as e:
         print("Tracker mentési hiba",str(e))
 
