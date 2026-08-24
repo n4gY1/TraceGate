@@ -11,7 +11,7 @@ from tracker.forms import CaseForm
 from tracker.models import Tracker, Case, CameraCapture
 
 
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def create_case_view(request):
     form = CaseForm()
     template = "tracker/create_case.html"

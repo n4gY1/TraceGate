@@ -13,7 +13,6 @@ urlpatterns = [
     path('save_gps/',save_gps_view,name='save_gps_view'),
     path('save_captured_image/',save_captured_image,name='save_captured_image'),
     path('show_captured_images/<int:tracker_id>',show_captured_images,name='show_captured_images'),
-    path('login/',login_view,name='login_view'),
     path('error/',js_error,name='js_error'),
 
 ]
