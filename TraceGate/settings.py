@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-c8he-c5c08(ejbli=u@swkc^43g6=s04hcn69@sq!v=l&r^$nu
 DEBUG = True
 APP_DOMAIN = "http://192.168.1.50:8000"
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app","https://share.secretdrop.eu"]
 
 # Application definition
 
