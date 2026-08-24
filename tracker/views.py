@@ -30,7 +30,7 @@ def create_case_view(request):
 @login_required(login_url='/login')
 def list_case_url_view(request):
     user = request.user
-    objs = Case.objects.filter(owner=user)
+    objs = Case.objects.filter(owner=user).order_by("-created")
     template = "tracker/list_case_url.html"
     context = {"objs": objs,"app_domain":APP_DOMAIN}
     return render(request, template, context)
