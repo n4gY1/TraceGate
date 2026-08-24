@@ -1,11 +1,13 @@
 import json
 import uuid
+from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
+from TraceGate import settings
 from TraceGate.settings import APP_DOMAIN
 from tracker.forms import CaseForm
 from tracker.models import Tracker, Case, CameraCapture
@@ -164,5 +166,22 @@ def save_captured_image(request):
 @csrf_exempt
 def js_error(request):
     data = json.loads(request.body)
+    log_file = settings.BASE_DIR / "js_errors.log"
     print("[!] ERROR",data)
+    ip = request.META.get("REMOTE_ADDR", "unknown")
+    method = request.method
+    user_agent = request.META.get("HTTP_USER_AGENT", "unknown")
+    referer = request.META.get("HTTP_REFERER", "unknown")
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(
+            f"[{timestamp}] "
+            f"IP={ip} "
+            f"METHOD={method} "
+            f"REFERER={referer} "
+            f"USER_AGENT={user_agent} "
+            f"DATA={data}\n"
+        )
     return HttpResponse("error")
