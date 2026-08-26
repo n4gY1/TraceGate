@@ -11,7 +11,7 @@ from TraceGate import settings
 from TraceGate.settings import APP_DOMAIN
 from tracker.forms import CaseForm
 from tracker.models import Tracker, Case, CameraCapture
-
+from django.shortcuts import get_object_or_404
 
 @login_required(login_url='/login')
 def create_case_view(request):
@@ -60,12 +60,9 @@ def show_captured_images(request,tracker_id):
 
 # Create your views here.
 def tracker_view(request,url_id):
-    try:
-        uuid.UUID(url_id)
-    except ValueError:
-        return redirect('/')
 
-    case = Case.objects.get(url_id=url_id)
+
+    case = get_object_or_404(Case,url_id=url_id)
     print("[+] case tracker view",case)
 
 
