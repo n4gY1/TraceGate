@@ -1003,7 +1003,7 @@ button:hover {
 .empty-state i {
     display: block;
 
-    #margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 
     font-size: 15px;
 
