@@ -58,12 +58,6 @@ def show_captured_images(request,tracker_id):
     context = {"pictures":pictures,"tracker":tracker}
     return render(request, template, context)
 
-
-
-
-def login_view(request):
-    pass
-
 # Create your views here.
 def tracker_view(request,url_id):
     try:

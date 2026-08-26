@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from tracker.views import tracker_view, create_case_view, save_gps_view, list_case_url_view, show_trackers_view, \
-    login_view, save_captured_image, js_error, show_captured_images
+    save_captured_image, js_error, show_captured_images
 
 urlpatterns = [
     path('id/<str:url_id>/', tracker_view, name='tracker_view'),

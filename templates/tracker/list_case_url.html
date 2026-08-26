@@ -124,81 +124,74 @@
 
 
             <div class="table-responsive">
-
                 <table class="case-table">
-
                     <thead>
-
                         <tr>
-
                             <th>
                                 <i class="bi bi-hash"></i>
                                 Case Number
                             </th>
-
                             <th>
                                 <i class="bi bi-clock"></i>
                                 Created
                             </th>
-
+                            <th>
+                                <i class="bi bi-clock"></i>
+                                Last
+                            </th>
+                            <th>
+                                <i class="bi bi-hash"></i>
+                                NR
+                            </th>
                             <th>
                                 <i class="bi bi-file-text"></i>
                                 Description
                             </th>
-
                             <th>
                                 <i class="bi bi-radar"></i>
                                 Intelligence
                             </th>
-
                         </tr>
-
                     </thead>
-
-
                     <tbody>
-
                         {% for obj in objs %}
-
                         <tr>
-
                             <td>
-
                                 <a href="{% url 'show_trackers_view' case_id=obj.pk %}"
                                    class="case-number">
-
                                     <span class="case-icon">
                                         <i class="bi bi-folder"></i>
                                     </span>
-
                                     {{ obj.case_number }}
-
                                 </a>
-
                             </td>
 
-
                             <td>
-
                                 <div class="case-date">
-
                                     <i class="bi bi-calendar3"></i>
-
-                                    {{ obj.created }}
-
+                                    {{ obj.created  }}
                                 </div>
+                            </td>
 
+                            <td>
+                                <div class="case-date">
+                                    <i class="bi bi-calendar3"></i>
+                                    {{ obj.get_last_tracker.created | timesince | default:"None" }}
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="case-description">
+                                    <i class="bi bi-hash"></i>
+                                    {{ obj.get_all_trackers.count|default:"None" }}
+                                </div>
                             </td>
 
 
                             <td>
-
                                 <div class="case-description">
-
                                     {{ obj.description|default:"No description available." }}
-
                                 </div>
-
                             </td>
 
 

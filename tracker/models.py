@@ -2,7 +2,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
-
+from shortuuidfield import ShortUUIDField
 # Create your models here.
 class Tracker(models.Model):
     case = models.ForeignKey('Case', on_delete=models.CASCADE)
@@ -30,9 +30,24 @@ class CameraCapture(models.Model):
 
 
 class Case(models.Model):
-    url_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    #url_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    url_id = ShortUUIDField(editable=False,unique=True)
+    created = models.DateTimeField(auto_now_add=True)
     case_number = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     redirect_url = models.CharField(max_length=200, null=True, blank=True)
+
+    @property
+    def get_all_trackers(self):
+        trackers = Tracker.objects.filter(case=self)
+        return trackers
+
+    @property
+    def get_last_tracker(self):
+        tracker = Tracker.objects.filter(case=self).order_by('-created').first()
+        if tracker is not None:
+            return tracker
+        else:
+            return "None"
