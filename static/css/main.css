@@ -1002,11 +1002,11 @@ button:hover {
 .empty-state i {
     display: block;
 
-    margin-bottom: 15px;
+    #margin-bottom: 15px;
 
-    font-size: 45px;
+    font-size: 15px;
 
-    color: #00ffd5;
+    color: #000;
 }
 
 
