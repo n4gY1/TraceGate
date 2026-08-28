@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>404 — Page Not Found</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #05070d;
+
+            color: #e9edf5;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================
+           MAIN PAGE
+        ========================================= */
+
+        .error-page {
+
+            position: relative;
+
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px 20px;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(0,255,213,0.07),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(0,90,255,0.07),
+                    transparent 30%
+                ),
+
+                #05070d;
+        }
+
+
+        /* =========================================
+           CYBER GRID
+        ========================================= */
+
+        .cyber-grid {
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(0,255,213,0.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(0,255,213,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 95%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           GLOW
+        ========================================= */
+
+        .glow {
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            filter: blur(150px);
+
+            opacity: 0.10;
+
+            pointer-events: none;
+        }
+
+
+        .glow-1 {
+
+            top: -250px;
+            left: -220px;
+
+            background: #00ffd5;
+        }
+
+
+        .glow-2 {
+
+            right: -250px;
+            bottom: -250px;
+
+            background: #0066ff;
+        }
+
+
+        /* =========================================
+           SCAN LINE
+        ========================================= */
+
+        .scan-line {
+
+            position: absolute;
+
+            top: -10%;
+
+            left: 0;
+
+            width: 100%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(0,255,213,0.45),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 18px
+                rgba(0,255,213,0.35);
+
+            animation:
+                scan 8s linear infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes scan {
+
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .error-container {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            max-width: 700px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 52px;
+            height: 52px;
+
+            margin-bottom: 25px;
+
+            border-radius: 15px;
+
+            color: #00ffd5;
+
+            font-size: 22px;
+
+            background:
+                rgba(0,255,213,0.07);
+
+            border:
+                1px solid
+                rgba(0,255,213,0.22);
+
+            box-shadow:
+
+                0 0 30px
+                rgba(0,255,213,0.10),
+
+                inset 0 0 20px
+                rgba(0,255,213,0.025);
+        }
+
+
+        /* =========================================
+           ERROR CODE
+        ========================================= */
+
+        .error-code {
+
+            font-family: monospace;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            color: #00ffd5;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================================
+           BIG 404
+        ========================================= */
+
+        .error-number {
+
+            position: relative;
+
+            font-size:
+                clamp(100px, 23vw, 190px);
+
+            line-height: 0.9;
+
+            font-weight: 900;
+
+            letter-spacing: -12px;
+
+            color: transparent;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #eaf8ff 0%,
+                    #788697 45%,
+                    #202833 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            text-shadow:
+
+                0 0 40px
+                rgba(0,255,213,0.08);
+        }
+
+
+        /* neon line through 404 */
+
+        .error-number::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 10%;
+            right: 0;
+
+            top: 53%;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #00ffd5 20%,
+                    #00ffd5 80%,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(0,255,213,0.7);
+
+            opacity: 0.7;
+
+            animation:
+                glitch-line 3s infinite;
+        }
+
+
+        @keyframes glitch-line {
+
+            0%,
+            90%,
+            100% {
+                transform: scaleX(0.7);
+                opacity: 0.3;
+            }
+
+            93% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+
+            96% {
+                transform: scaleX(0.85);
+                opacity: 0.5;
+            }
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .error-title {
+
+            margin-top: 20px;
+
+            font-size:
+                clamp(24px, 5vw, 34px);
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+
+            color: #eef4fa;
+        }
+
+
+        .error-description {
+
+            max-width: 500px;
+
+            margin: 12px auto 0;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            color: #687486;
+        }
+
+
+        /* =========================================
+           STATUS
+        ========================================= */
+
+        .system-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 25px;
+
+            padding: 8px 13px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(0,255,136,0.035);
+
+            border:
+                1px solid
+                rgba(0,255,136,0.10);
+
+            color: #00e58c;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #00ff88;
+
+            box-shadow:
+                0 0 9px #00ff88;
+
+            animation:
+                pulse 1.8s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .return-button {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            margin-top: 25px;
+
+            min-height: 46px;
+
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            color: #00110e;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00ffd5,
+                    #00dcb9
+                );
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,255,213,0.18);
+
+            transition: 0.25s;
+        }
+
+
+        .return-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,255,213,0.32);
+        }
+
+
+        .return-button:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================================
+           TECH INFO
+        ========================================= */
+
+        .technical-info {
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 28px;
+
+            font-family: monospace;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            color: #343d4a;
+        }
+
+
+        .technical-info .separator {
+
+            color: #202733;
+        }
+
+
+        /* =========================================
+           CORNER DECORATIONS
+        ========================================= */
+
+        .corner {
+
+            position: absolute;
+
+            width: 35px;
+            height: 35px;
+
+            border-color:
+                rgba(0,255,213,0.25);
+
+            border-style: solid;
+
+            pointer-events: none;
+        }
+
+
+        .corner.top-left {
+
+            top: -18px;
+            left: -18px;
+
+            border-width:
+                1px 0 0 1px;
+        }
+
+
+        .corner.top-right {
+
+            top: -18px;
+            right: -18px;
+
+            border-width:
+                1px 1px 0 0;
+        }
+
+
+        .corner.bottom-left {
+
+            bottom: -18px;
+            left: -18px;
+
+            border-width:
+                0 0 1px 1px;
+        }
+
+
+        .corner.bottom-right {
+
+            bottom: -18px;
+            right: -18px;
+
+            border-width:
+                0 1px 1px 0;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            .error-page {
+
+                padding: 25px 15px;
+            }
+
+
+            .logo {
+
+                width: 46px;
+                height: 46px;
+
+                font-size: 19px;
+
+                margin-bottom: 20px;
+            }
+
+
+            .error-number {
+
+                letter-spacing: -7px;
+            }
+
+
+            .error-title {
+
+                margin-top: 15px;
+
+                font-size: 25px;
+            }
+
+
+            .error-description {
+
+                font-size: 12px;
+
+                max-width: 340px;
+            }
+
+
+            .return-button {
+
+                width: auto;
+
+                max-width: 100%;
+            }
+
+
+            .technical-info {
+
+                flex-wrap: wrap;
+
+                line-height: 1.6;
+            }
+        }
+
+
+        @media (max-width: 380px) {
+
+            .error-number {
+
+                font-size: 105px;
+
+                letter-spacing: -5px;
+            }
+
+
+            .error-title {
+
+                font-size: 23px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="error-page">
+
+    <!-- Cyber background -->
+
+    <div class="cyber-grid"></div>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="scan-line"></div>
+
+
+    <!-- Main -->
+
+    <main class="error-container">
+
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <i class="bi bi-shield-lock-fill"></i>
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div class="error-code">
+
+            SYSTEM_ERROR // HTTP 500
+
+        </div>
+
+
+        <div class="error-number">
+
+            500
+
+        </div>
+
+
+        <h1 class="error-title">
+
+            Server Error
+
+        </h1>
+
+
+        <p class="error-description">
+
+            Internal Server Error
+            <br>
+            Something went wrong on our server.
+            <br>
+
+            If the problem persists, please contact the system administrator.
+
+        </p>
+
+
+        <!-- Status -->
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            SYSTEM OPERATIONAL
+
+        </div>
+
+
+        <!-- Return -->
+
+        <div>
+
+            <a href="/" class="return-button">
+
+                <i class="bi bi-arrow-left"></i>
+
+                RETURN TO MAIN
+
+            </a>
+
+        </div>
+
+
+        <!-- Technical -->
+
+        <div class="technical-info">
+
+            <span>
+                HTTP 404
+            </span>
+
+            <span class="separator">
+                //
+            </span>
+
+            <span>
+                RESOURCE NOT FOUND
+            </span>
+
+            <span class="separator">
+                //
+            </span>
+
+            <span>
+                TRACKER INTELLIGENCE
+            </span>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
