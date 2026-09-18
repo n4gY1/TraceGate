@@ -245,7 +245,7 @@
                                                 {% if obj.latitude != None %}
                                                 {{ obj.latitude }},
                                                 {{ obj.longitude }}
-                                                <a href="https://maps.google.com/?q={{obj.latitude}},{{obj.longitude}}">show</a>
+                                                <a href="https://maps.google.com/?q={{obj.latitude}},{{obj.longitude}}" target="_blank"><i class="bi bi-pin-map"></i></a>
                                                 {% else %}
                                                 None
                                                 {% endif %}
