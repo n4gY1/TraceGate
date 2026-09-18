@@ -243,11 +243,12 @@
 
                                             <strong>
                                                 {% if obj.latitude != None %}
-                                                {{ obj.latitude }},
-                                                {{ obj.longitude }}
-                                                <a href="https://maps.google.com/?q={{obj.latitude}},{{obj.longitude}}" target="_blank"><i class="bi bi-pin-map"></i></a>
+                                                    <a href="https://maps.google.com/?q={{obj.latitude}},{{obj.longitude}}" target="_blank" style="text-decoration:none"><i class="bi bi-pin-map"></i>
+                                                    {{ obj.latitude }},
+                                                    {{ obj.longitude }}
+                                                    </a>
                                                 {% else %}
-                                                None
+                                                    None
                                                 {% endif %}
 
                                             </strong>
