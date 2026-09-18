@@ -10,6 +10,7 @@ class CaseAdmin(admin.ModelAdmin):
 class TrackerAdmin(admin.ModelAdmin):
     list_display = ["case__case_number","created","ip_address","x_forwarded_for","accuracy"]
 
+
 class CameraCaptureAdmin(admin.ModelAdmin):
     list_display = ["tracker__case__case_number", "created", "photo"]
 
