@@ -242,7 +242,7 @@
                                             <span>LOCATION</span>
 
                                             <strong>
-                                                {% if obj.latitude not "None" %}
+                                                {% if obj.latitude != "None" %}
                                                 {{ obj.latitude }},
                                                 {{ obj.longitude }}
                                                 <a href="https://maps.google.com/?q={{obj.latitude}},{{obj.longitude}}">show</a>
